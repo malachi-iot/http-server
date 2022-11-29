@@ -13,4 +13,4 @@ Examples include:
 ### Fileserver
 
 A rudimentary file server with awful path handling but pretty sweet
-data chunking.
+data chunking and thread pooling.
