@@ -7,8 +7,8 @@
 #include <err.h>
 
 #include "http/context.h"
-#include "http/pipeline.h"
-#include "http/request.h"
+#include <http/pipeline.h>
+#include <http/header-constants.h>
 #include "http/statemachine/request.h"
 #include "http/response.h"
 
@@ -51,15 +51,13 @@ void http_fileserver_get(const HttpContext* context, void* arg)
         FILE* out = context->transport.connfile;
 
         http_response_emit_generic(context, HTTP_RESPONSE_OK);
-        // After all that, maybe it's easier to do fprintf's.......
-        //HttpHeaders headers;
-        //http_headers_add_header(&headers, HTTP_HEADER_FIELD_CONTENT_LENGTH, )
 
         // Different platforms' printf get ornery with different off_t,
         // so yank it out into a known variable size
         long filesize = st.st_size;
 
-        fprintf(out, "Content-Length: %ld\r\n", filesize);
+        http_response_emit_stream_header_int(context, HTTP_HEADER_FIELD_CONTENT_LENGTH, filesize);
+
         fputs("\r\n", out); // No further headers
         fflush(out);    // for big files and/or slow connections, this is helpful
 

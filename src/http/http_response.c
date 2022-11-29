@@ -71,6 +71,24 @@ void http_response_emit_socket_header(const HttpContext* context, const char* ke
     write(connfd, ":", 1);
     write(connfd, value, strlen(value));
     write(connfd, CRLF, 2);
+
+    HttpPipelineResponseMessage prm;
+
+    prm.state = HTTP_RESPONSE_HEADERS_LINE;
+    http_pipeline_response_message(context, &prm);
+}
+
+void http_response_emit_stream_header_int(const HttpContext* context, const char* key, long int value)
+{
+    FILE* f = context->transport.connfile;
+
+    fputs(key, f);
+    fprintf(f, ": %ld\r\n", value);
+
+    HttpPipelineResponseMessage prm;
+
+    prm.state = HTTP_RESPONSE_HEADERS_LINE;
+    http_pipeline_response_message(context, &prm);
 }
 
 void http_response_emit_socket_header_int(const HttpContext* context, const char* key, int value)
@@ -82,6 +100,11 @@ void http_response_emit_socket_header_int(const HttpContext* context, const char
     int len = sprintf(s, ":%d", value);
     write(connfd, s, len);
     write(connfd, CRLF, 2);
+
+    HttpPipelineResponseMessage prm;
+
+    prm.state = HTTP_RESPONSE_HEADERS_LINE;
+    http_pipeline_response_message(context, &prm);
 }
 
 

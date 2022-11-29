@@ -23,3 +23,4 @@ void http_response_emit_generic(const HttpContext* context, HttpResponseCodes co
 void http_response_emit_socket_generic(const HttpContext* context, HttpResponseCodes code);
 void http_response_emit_socket_header(const HttpContext* context, const char* key, const char* value);
 void http_response_emit_socket_header_int(const HttpContext* context, const char* key, int value);
+void http_response_emit_stream_header_int(const HttpContext* context, const char* key, long int value);
