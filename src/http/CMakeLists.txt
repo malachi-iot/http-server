@@ -9,24 +9,34 @@ add_subdirectory_lazy(../containers malachi-iot::c_containers)
 add_subdirectory_lazy(../tokenizer malachi-iot::tokenizer)
 
 set(INCLUDE_FILES
-        http/pipeline.h
-        http/request.h
-        http/response.h
-        )
+    http/pipeline.h
+    http/request.h
+    http/response.h
+    )
+
+set(SOURCE_FILES
+    debug.c
+    http_context.c
+    http_header.c
+    http_pipeline.c
+    http_request.c
+    http_request_decoder.c
+    http_request_posix.c
+    http_request_statemachine.c
+    http_response.c
+    http_threadpool.c
+    )
+
+
+if(PLATFORM_LWIP)
+    set(SOURCE_FILES ${SOURCE_FILES} http_request_lwip.c)
+endif()
+
 
 add_library(${PROJECT_NAME}
-        debug.c
-        http_context.c
-        http_header.c
-        http_pipeline.c
-        http_request.c
-        http_request_decoder.c
-        http_request_posix.c
-        http_request_statemachine.c
-        http_response.c
-        http_threadpool.c
-        ${INCLUDE_FILES}
-        )
+    ${SOURCE_FILES}
+    ${INCLUDE_FILES}
+    )
 
 
 add_library(malachi-iot::http-server ALIAS ${PROJECT_NAME})

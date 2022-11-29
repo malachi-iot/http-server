@@ -7,7 +7,7 @@
 
 #include "bind.h"
 
-#if ESP_PLATFORM
+#if PLATFORM_LWIP
 #include <lwip/sockets.h>
 #endif
 

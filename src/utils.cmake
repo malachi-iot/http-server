@@ -22,3 +22,12 @@ add_subdirectory_lazy(${EXT_DIR} pglx::ext)
 add_compile_options(-Werror=return-type)
 # This helps assert() not generate warnings
 add_compile_options(-Wno-unused-value)
+
+# DEBT: Really would like to use estdlib, but keeping it more approachable
+# and doing some basic platform detection here instead
+if(ESP_PLATFORM)
+    SET(PLATFORM_FREERTOS 1)
+    SET(PLATFORM_LWIP 1)
+    add_compile_definitions(PLATFORM_FREERTOS=1)
+    add_compile_definitions(PLATFORM_LWIP=1)
+endif()

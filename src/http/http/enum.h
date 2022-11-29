@@ -30,6 +30,11 @@ typedef enum
 
 } HttpResponseCodes;
 
+// DEBT: Move feature flags elsewhere
+#ifndef FEATURE_RUNTIME_HTTP_TRANSPORT
+#define FEATURE_RUNTIME_HTTP_TRANSPORT 1
+#endif
+//#define COMPILE_TIME_HTTP_TRANSPORT
 
 typedef enum
 {

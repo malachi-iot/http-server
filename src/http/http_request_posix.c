@@ -120,8 +120,13 @@ static bool http_request_state_machine_socket(HttpRequestStateMachine* sm)
 }
 
 
+bool http_request_state_machine_netconn(HttpRequestStateMachine* sm);
+bool http_request_state_machine_pcb(HttpRequestStateMachine* sm);
+
+
 bool http_request_state_machine(HttpRequestStateMachine* sm)
 {
+#if FEATURE_RUNTIME_HTTP_TRANSPORT
     const HttpContext* c = &sm->const_context;
 
     switch(c->transport.type)
@@ -135,9 +140,34 @@ bool http_request_state_machine(HttpRequestStateMachine* sm)
             return http_request_state_machine_file(sm);
 #endif
 
+#if PLATFORM_LWIP
+        case HTTP_TRANSPORT_LWIP_NETBUF:
+            return http_request_state_machine_netconn(sm);
+
+        case HTTP_TRANSPORT_LWIP_PCB:
+            return http_request_state_machine_pcb(sm);
+#endif
+
         default:
             LOG_WARN("http_request_state_machine: unsupported transport %d", c->transport.type);
             return true;
     }
+#elif defined(COMPILE_TIME_HTTP_TRANSPORT)
+
+#if COMPILE_TIME_HTTP_TRANSPORT == 0
+    return http_request_state_machine_socket(sm);
+#elif COMPILE_TIME_HTTP_TRANSPORT == 1
+    return http_request_state_machine_file(sm);
+#elif COMPILE_TIME_HTTP_TRANSPORT == 2
+    return http_request_state_machine_netconn(sm);
+#elif COMPILE_TIME_HTTP_TRANSPORT == 3
+    return http_request_state_machine_pcb(sm);
+#else
+#error "Unrecognized COMPILE_TIME_HTTP_TRANSPORT"
+#endif
+
+#else
+#error "Either FEATURE_RUNTIME_HTTP_TRANSPORT or COMPILE_TIME_HTTP_TRANSPORT must be specified"
+#endif
 }
 
