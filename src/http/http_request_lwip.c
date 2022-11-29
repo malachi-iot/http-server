@@ -18,14 +18,19 @@ bool http_request_state_machine_netconn(HttpRequestStateMachine* sm)
 {
     const HttpContext* c = &sm->const_context;
     struct netbuf* buf;
-    Span in;
+    ConstSpan* in = &sm->tokenizer.in;
 
-    err_t e = netconn_recv(c->transport.netconn, &buf);
-
-    if(buf)
+    if(in->sz == 0)
     {
-        netbuf_data(buf, (void*) &in.buf, &in.sz);
+        err_t e = netconn_recv(c->transport.netconn, &buf);
+
+        if(buf)
+        {
+            netbuf_data(buf, (void*) &in->buf, &in->sz);
+        }
     }
+
+    unsigned processed = http_request_state_machine_process_chunk(sm, in->buf, in->sz);
 
     return true;
 }
