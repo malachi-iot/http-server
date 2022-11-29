@@ -1,7 +1,7 @@
 #pragma once
 
 #include <bool.h>
-#include <util.h>
+#include <span.h>
 #include "../enum.h"
 #include "../out.h"
 

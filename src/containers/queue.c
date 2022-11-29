@@ -15,11 +15,11 @@
 // counter flavor is self-explanatory
 // NOTE: We only employ a counter for diagnostics, it's not used for full/empty detection
 
-// my experimental technique closely resembles the answer given at [8]
+// technique we use closely resembles the answer given at [8]
 // empty    - tail == null
 // full     - tail == head
 
-#if !EXPERIMENTAL && !defined(USE_COUNTER)
+#if !FEATURE_QUEUE_TAILFLAG && !defined(USE_COUNTER)
 #define USE_COUNTER 1
 #endif
 
@@ -56,7 +56,7 @@ queue_t* queue_new(int size)
     queue_t* q = (queue_t*) malloc(sizeof(queue_t) + (sizeof(void*) * size));
     q->storage = (void**)(q + 1);
     q->head = q->storage;
-#if EXPERIMENTAL
+#if FEATURE_QUEUE_TAILFLAG
     q->tail = NULL;
 #else
     q->tail = q->head;
@@ -101,7 +101,7 @@ void queue_delete(queue_t **q)
 
 static bool is_empty(const queue_t* q)
 {
-#if EXPERIMENTAL
+#if FEATURE_QUEUE_TAILFLAG
     return q->tail == NULL;
 #else
     return q->head == q->tail;
@@ -110,7 +110,7 @@ static bool is_empty(const queue_t* q)
 
 static bool is_full(const queue_t* q)
 {
-#if EXPERIMENTAL
+#if FEATURE_QUEUE_TAILFLAG
     return q->head == q->tail;
 #else
     // "eat one slot" approach
@@ -142,7 +142,7 @@ bool queue_push(queue_t *q, void *elem)
 {
     lock(q);
 
-#if EXPERIMENTAL
+#if FEATURE_QUEUE_TAILFLAG
     if(is_empty(q))
     {
         // tail no longer NULL, means we have something in our queue
@@ -205,11 +205,10 @@ bool queue_pop(queue_t *q, void **elem)
     *elem = *q->tail;
     increment(q, &q->tail);
 
-#if EXPERIMENTAL
+#if FEATURE_QUEUE_TAILFLAG
     // If we pop to the point we've met the head again, we know we're empty now
     // (that part is not experimental, just hard to record)
     if(q->head == q->tail)
-        // Experimental part here -- record result of this knowledge as a NULL
         q->tail = NULL;
 #endif
 

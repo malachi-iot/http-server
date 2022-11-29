@@ -2,8 +2,10 @@
 
 #include "bool.h"
 
-// Experimental mode treats 'tail'==nullptr as flag for empty queue
-#define EXPERIMENTAL 1
+// Treats 'tail'==nullptr as flag for empty queue
+#ifndef FEATURE_QUEUE_TAILFLAG
+#define FEATURE_QUEUE_TAILFLAG 1
+#endif
 
 typedef struct queue queue_t;
 queue_t *queue_new(int size);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <util.h>
+#include <span.h>
 #include "fwd.h"
 
 /// 'out' in direct mode is largely ignored

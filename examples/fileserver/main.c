@@ -1,4 +1,4 @@
-// All references pertain to README.md
+// All references pertain to REFERENCES.md
 #include <ctype.h>
 #include <signal.h>
 #include <stdio.h>

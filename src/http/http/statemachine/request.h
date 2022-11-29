@@ -4,7 +4,7 @@
 #include "enum.h"
 #include "../context.h"
 #include "../internal/header.h"
-#include <util.h>
+#include <span.h>
 #include <statemachine/enum.h>
 #include <statemachine/tokenizer.h>
 #include <statemachine/internal/tokenizer.h>

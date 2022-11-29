@@ -1,4 +1,4 @@
-// All references see README.md
+// All references see REFERENCES.md
 // This file contains all the app-specific stuff to create a particular kind of webserver
 #include <memory.h>
 #include <stdio.h>
@@ -31,9 +31,13 @@ void http_sys_init(int port, int thread_count, const char* logfile)
     assert(thread_count >= 2);
 
     http_pipeline_placement_new(&pipeline);
+
+    // Unnecessary options here, just demonstrates how one can
+    // set up per-request memory allocation
     HttpPipelineHandlerOptions hpho;
     hpho.arg = NULL;
     hpho.context_size = 8;
+
     http_pipeline_add_request(&pipeline);
     http_pipeline_add(&pipeline, "diagnostic", http_pipeline_diagnostic, &hpho);
     http_pipeline_add_fileserver(&pipeline, true);

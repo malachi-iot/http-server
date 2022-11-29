@@ -2,7 +2,7 @@
 
 #include <unity.h>
 
-#include <util.h>
+#include <span.h>
 
 typedef struct DoubleBuffer
 {

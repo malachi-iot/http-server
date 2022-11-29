@@ -1,4 +1,4 @@
-// All references see README.md
+// All references see REFERENCES.md
 #include <stdio.h>
 
 #include <err.h>
