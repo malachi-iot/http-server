@@ -14,5 +14,5 @@ add_library(malachi-iot::tokenizer ALIAS ${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME} PUBLIC .)
 
-target_link_libraries(${PROJECT_NAME}_shared malachi-iot::queue malachi-iot::c_containers)
-target_link_libraries(${PROJECT_NAME} malachi-iot::queue malachi-iot::c_containers)
+target_link_libraries(${PROJECT_NAME}_shared malachi-iot::c_containers)
+target_link_libraries(${PROJECT_NAME} malachi-iot::c_containers)

@@ -31,8 +31,8 @@ typedef struct
 
     struct
     {
-        int reference_count : 15;
-        int inline_allocated : 1;
+        unsigned reference_count : 15;
+        unsigned inline_allocated : 1;
     };
 
 } SharedPtr;
