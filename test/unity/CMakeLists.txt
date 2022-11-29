@@ -7,7 +7,7 @@ set(SRC_DIR ../../src)
 
 include(${SRC_DIR}/utils.cmake)
 
-add_subdirectory_lazy(${SRC_DIR}/audit pglx-10::audit)
+add_subdirectory_lazy(${SRC_DIR}/audit malachi-iot::http-audit)
 add_subdirectory_lazy(${SRC_DIR}/http malachi-iot::http-server)
 add_subdirectory_lazy(${SRC_DIR}/fileserver malachi-iot::http-fileserver)
 add_subdirectory_lazy(${SRC_DIR}/tokenizer malachi-iot::tokenizer)
@@ -34,5 +34,5 @@ add_executable(malachi-iot::http-server-unity ALIAS ${PROJECT_NAME})
 target_compile_options(${PROJECT_NAME} PRIVATE -Werror=return-type)
 
 target_link_libraries(${PROJECT_NAME} unity)
-target_link_libraries(${PROJECT_NAME} pglx-10::audit malachi-iot::c_containers malachi-iot::tokenizer)
+target_link_libraries(${PROJECT_NAME} malachi-iot::http-audit malachi-iot::c_containers malachi-iot::tokenizer)
 target_link_libraries(${PROJECT_NAME} malachi-iot::http-server malachi-iot::http-fileserver)

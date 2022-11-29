@@ -61,3 +61,7 @@ build-pglx-*/
 # esp-idf
 sdkconfig
 sdkconfig.old
+
+# for our own testing
+.temp
+bin/test*.txt*

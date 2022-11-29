@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.18)
-project(pglx-10-asgn3 C)
+project(http-audit C)
 
 set(CMAKE_C_STANDARD 11)
 
 add_subdirectory_lazy(../http malachi-iot::http-server)
 
-add_library(${PROJECT_NAME} audit.c)
+add_library(${PROJECT_NAME} audit.c pipeline.c)
 
-add_library(pglx-10::audit ALIAS ${PROJECT_NAME})
+add_library(malachi-iot::http-audit ALIAS ${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME} PUBLIC .)
 
