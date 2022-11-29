@@ -15,9 +15,8 @@ if(NOT ESP_PLATFORM)
     #find_package(logger REQUIRED)
     # pthreads needs this [6] - also according to [6] clang can do this with a -pthreads compiler option
     find_package(Threads REQUIRED)
-else()
-    message(DEBUG "Compiling for esp-idf")
 endif()
+
 
 set(SOURCE
         array.h
@@ -40,14 +39,14 @@ target_include_directories(${PROJECT_NAME} PUBLIC .)
 target_include_directories(${PROJECT_NAME}_shared PUBLIC .)
 
 if(NOT ESP_PLATFORM)
-    message(DEBUG "Desktop")
+    message(DEBUG "c_containers for Desktop")
     # Almost works, just doesn't like include_next
     #target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Werror -Wextra -pedantic)
 
     target_link_libraries(${PROJECT_NAME}_shared Threads::Threads logger)
     target_link_libraries(${PROJECT_NAME} Threads::Threads logger_static)
 else()
-    message(DEBUG "esp-idf")
+    message(DEBUG "c_containers for esp-idf")
     target_include_directories(${PROJECT_NAME} PUBLIC esp-idf)
     target_include_directories(${PROJECT_NAME}_shared PUBLIC esp-idf)
 endif()

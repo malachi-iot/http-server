@@ -65,3 +65,6 @@ sdkconfig.old
 # for our own testing
 .temp
 bin/test*.txt*
+
+# vscode, sorry buddy, no git for you
+.vscode/
