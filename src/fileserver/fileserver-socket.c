@@ -89,7 +89,7 @@ static void http_fileserver_on_state_body_put(const StateMachineMessage* m, Loca
     if(c->file_fd == -1) return;
 
     const HttpContext* context = &m->sm->const_context;
-    const HttpRequest* r = context->request;
+    //const HttpRequest* r = context->request;
 
     size_t n = context->content_length - m->position;
 
@@ -98,7 +98,9 @@ static void http_fileserver_on_state_body_put(const StateMachineMessage* m, Loca
 
     ssize_t written = write(c->file_fd, m->body.buf, n);
 
-    // DEBT: Do something about write errors
+    // DEBT: Do something more significant about write errors
+    if(written != n)
+        LOG_INFO("http_fileserver_on_state_body_put: didn't write all characters");
 
     if(m->position == 0)
     {

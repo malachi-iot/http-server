@@ -71,10 +71,11 @@ void threadpool_placement_new(ThreadPool* p, int count, worker_routine worker, v
 {
     assert(("need a thread_count", count > 0));
 
-    int s, num_threads = count;
+    int s;
+    //int num_threads = count;
     pthread_attr_t attr;
     //ssize_t stack_size;
-    void *res;
+    //void *res;
 
     array_placement_new(&p->threads, sizeof(pthread_t), count);
 
