@@ -4,3 +4,6 @@
 [submodule "ext/Unity"]
 	path = ext/Unity
 	url = git@github.com:ThrowTheSwitch/Unity.git
+[submodule "ext/estdlib"]
+	path = ext/estdlib
+	url = git@github.com:malachi-iot/estdlib.git
