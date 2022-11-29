@@ -1,10 +1,6 @@
 # External Dependencies
 
-## Unity
+## CMakeLists.txt
 
-Used by PGLX-10
-
-## c-logger
-
-Used by PGLX-10
-
+This is here and mostly dormant.  May come in handy for scenarios
+in which external code has no CMakeLists.txt of its own
