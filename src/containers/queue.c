@@ -1,3 +1,4 @@
+// All references in REFERENCES.md
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -15,7 +16,7 @@
 // counter flavor is self-explanatory
 // NOTE: We only employ a counter for diagnostics, it's not used for full/empty detection
 
-// technique we use closely resembles the answer given at [8]
+// technique we use closely resembles the answer given at [38]
 // empty    - tail == null
 // full     - tail == head
 
@@ -37,12 +38,12 @@ typedef struct queue
 
     pthread_mutex_t mutex;
 
-    // As per [9] I like dedicated variables a little better - reduce spurious wakeups for buffers which
+    // As per [39] I like dedicated variables a little better - reduce spurious wakeups for buffers which
     // are constantly getting filled and emptied and blocked on both conditions
 #if USE_DEDICATED_CV
     pthread_cond_t cv_pushed, cv_popped;
 #else
-    // Guidance from [3] and [4] and cherry picked guidance from [2] (it's got some issues)
+    // Guidance from [33] and [34] and cherry picked guidance from [32] (it's got some issues)
     pthread_cond_t cv;
 #endif
 
@@ -67,7 +68,7 @@ queue_t* queue_new(int size)
 
     q->end = q->storage + size - 1;
 
-    // [1] for guidance
+    // [31] for guidance
     pthread_mutex_init(&q->mutex, NULL);
 #if USE_DEDICATED_CV
     pthread_cond_init(&q->cv_pushed, NULL);
