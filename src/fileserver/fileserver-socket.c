@@ -1,4 +1,4 @@
-// All references see README.md
+// All references see REFERENCES.md
 #include <string.h>
 
 #include <fcntl.h>
@@ -11,13 +11,12 @@
 
 #include "http/context.h"
 #include "http/pipeline.h"
-#include "http/pipeline/message.h"
+#include <http/pipeline/message.h>
 #include "http/header-constants.h"
-#include "http/request.h"
-#include "http/statemachine/request.h"
+#include <http/request.h>
 #include "http/response.h"
 
-#include "http/internal/request.h"
+#include <http/internal/request.h>
 
 #include "http/pipeline/fileserver.h"
 #include "http/pipeline/internal/fileserver.h"
