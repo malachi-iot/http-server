@@ -1,0 +1,6 @@
+[submodule "ext/c-logger"]
+	path = ext/c-logger
+	url = git@github.com:yksz/c-logger.git
+[submodule "ext/Unity"]
+	path = ext/Unity
+	url = git@github.com:ThrowTheSwitch/Unity.git
