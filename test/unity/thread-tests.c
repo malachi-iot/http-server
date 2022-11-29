@@ -1,3 +1,5 @@
+// Specifically, queue + thread interactions
+
 #include <errno.h>
 #include <pthread.h>
 #include <stdlib.h>

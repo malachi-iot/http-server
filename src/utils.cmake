@@ -18,6 +18,7 @@ set(EXT_DIR ${ROOT_DIR}/ext)
 
 add_subdirectory_lazy(${EXT_DIR} pglx::ext)
 
+# This should be standard for any modern C/C++ environment
 add_compile_options(-Werror=return-type)
 # This helps assert() not generate warnings
 add_compile_options(-Wno-unused-value)

@@ -7,9 +7,6 @@
 #include "thread-tests.h"
 #include "queue.h"
 
-void setUp() {}
-void tearDown() {}
-
 void test_NonThreaded()
 {
     int val = 777;
@@ -92,15 +89,13 @@ void test_boundaries()
     queue_delete(&q);
 }
 
-int main()
-{
-    UNITY_BEGIN();
 
+void queue_tests()
+{
+    UnitySetTestFile(__FILE__);
     RUN_TEST(test_NonThreaded);
     RUN_TEST(test_boundaries);
     RUN_TEST(test_basic_thread);
     RUN_TEST(test_advanced_thread);
     RUN_TEST(test_assignment_thread);
-
-    return UNITY_END();
 }

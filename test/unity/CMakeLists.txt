@@ -13,11 +13,15 @@ add_subdirectory_lazy(${SRC_DIR}/fileserver malachi-iot::http-fileserver)
 add_subdirectory_lazy(${SRC_DIR}/tokenizer malachi-iot::tokenizer)
 add_subdirectory_lazy(${EXT_DIR}/Unity unity)
 
+# DEBT: This doesn't seem like quite the right way to activate this feature, but it works
+target_compile_definitions(unity PRIVATE UNITY_INCLUDE_PRINT_FORMATTED)
+
 # DEBT: Yes, we were naughty and mixed convention using both _ and - for separators.  That needs attention
 
 add_executable(${PROJECT_NAME}
         array_test.c
         audit_tests.c
+        domain-socket.c
         experimental_test.c
         http_fileserver_tests.c
         http_header_test.c
@@ -25,13 +29,17 @@ add_executable(${PROJECT_NAME}
         http_request_test.c
         http_response_tests.c
         main.c
-        domain-socket.c
+        queue-tests.c
         tokenizer_tests.c
+        thread-tests.c
         )
 
 add_executable(malachi-iot::http-server-unity ALIAS ${PROJECT_NAME})
 
-target_compile_options(${PROJECT_NAME} PRIVATE -Werror=return-type)
+# TODO: Get things working even in this environment - right now unused variables
+# and gnu extensions make it mad
+#target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Werror -Wextra -pedantic)
+
 
 target_link_libraries(${PROJECT_NAME} unity)
 target_link_libraries(${PROJECT_NAME} malachi-iot::http-audit malachi-iot::c_containers malachi-iot::tokenizer)

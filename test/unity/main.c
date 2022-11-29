@@ -34,6 +34,7 @@ int main()
     http_response_tests();
     audit_tests();
     experimental_tests();
+    queue_tests();
     tokenizer_tests();
     UNITY_END();
 

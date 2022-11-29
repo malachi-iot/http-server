@@ -10,4 +10,5 @@ void http_header_tests();
 void http_pipeline_tests();
 void http_request_tests();
 void http_response_tests();
+void queue_tests();
 void tokenizer_tests();
