@@ -46,6 +46,8 @@ Automatically include definitions for HTTP control structures rather than trying
 2.  Add LwIP transport
 3.  Add a kind of object stack to hold on to strings
 4.  Switch comments to refer to REFERENCES.md rather than README.md
+5.  Sort out shared vs static handling in `CMakeLists.txt`s
+6.  CI/CD and conan.io, someday....
 
 # References
 
