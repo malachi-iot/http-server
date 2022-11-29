@@ -5,6 +5,10 @@ Since then it has grown into a viable very small web server.
 
 Design goals specifically include embedded (i.e. bare metal, RTOS) environments.  A working example of this is under 'esp-idf' folder.
 
+## Getting Started
+
+For a quick start, have a look at [the examples](examples/README.md)
+
 ## Caveats
 
 Despite embedded design goals, there are still too many malloc dependencies for comfort.  Specifically when it comes to holding on to persistent strings
