@@ -1,0 +1,45 @@
+#pragma once
+
+typedef enum
+{
+    HTTP_METHOD_INVALID = -1,
+
+    HTTP_METHOD_APPEND,
+    HTTP_METHOD_GET,
+    HTTP_METHOD_HEAD,
+    HTTP_METHOD_PATCH,
+    HTTP_METHOD_POST,
+    HTTP_METHOD_PUT,
+
+    HTTP_METHOD_INVALID_UPPER
+
+} HttpMethods;
+
+
+typedef enum
+{
+    HTTP_RESPONSE_UNINITIALIZED = 0,
+    HTTP_RESPONSE_OK = 200,
+    HTTP_RESPONSE_CREATED = 201,
+    HTTP_RESPONSE_BAD_REQUEST = 400,
+    HTTP_RESPONSE_NOT_FOUND = 404,
+    HTTP_RESPONSE_METHOD_NOT_ALLOWED = 405,
+    HTTP_RESPONSE_INTERNAL_SERVER_ERROR = 500,
+    HTTP_RESPONSE_NOT_IMPLEMENTED = 501,
+    HTTP_RESPONSE_SERVICE_UNAVAILABLE = 503,
+
+} HttpResponseCodes;
+
+
+typedef enum
+{
+    HTTP_TRANSPORT_NONE = -1,   ///< For synthetic/unit testing where no transport exists
+
+    HTTP_TRANSPORT_SOCKET,
+    HTTP_TRANSPORT_STREAM,      ///< FILE streams, wrapped around socket
+
+    HTTP_TRANSPORT_LWIP_NETBUF,
+    HTTP_TRANSPORT_LWIP_PCB,
+}   HttpTransports;
+
+
